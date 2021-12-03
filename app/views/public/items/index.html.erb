@@ -1,0 +1,22 @@
+<div class="row">
+ <div class="col-lg-2">
+ </div>
+<h3 style="margin: 20px 0;">商品一覧(全<%= @items.count %>件)</h3>
+</div>
+
+<div class="row">
+	  <div class="col-lg-2">
+		</div>
+	<div class="col-xs-9">
+		
+   <% @items.each do |item| %>
+			<%= link_to item_path(item.id) ,style: "color: black;", data: {"turbolinks" => false} do %>
+			<td><%= attachment_image_tag item, :image, :fill, 100,100  %></td><br>
+			<td><%= item.name %></td><br>
+			<td>¥<%= item.price %> 円</td>
+			<p></p>
+			<% end %>
+		</div>
+		
+		<% end %>
+		</div>

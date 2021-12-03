@@ -1,0 +1,48 @@
+<script src="https://kit.fontawesome.com/0248f01308.js" crossorigin="anonymous"></script>
+<div class="container takasa tect-center">
+  <div class="row">
+      <h2>商品一覧</h2>
+       <% if flash[:notice_update] %>
+      <div class="flash">
+        <%= flash[:notice_update] %>
+      </div>
+      <% end %>
+  </div>
+
+
+ <div class="col-xs-10 member-index">
+  <div class="text-right">
+      <%= link_to "新規登録" ,new_admin_item_path %>
+  </div>
+
+      
+  <table class="table">
+   <thead>
+   <tr>
+   <th>商品ID</th>
+   <th>商品名</th>
+   <th>税抜価格</th>
+   <th>ジャンル</th>
+   <th>ステータス</th>
+   </tr>
+   </thead>
+
+  <tbody>
+   <% @items.each do |item| %>
+  <tr>
+   <td><%= item.id %></td>
+   <td><%= link_to item.name ,admin_item_path(item) %></td>
+   <td> <%= item.price %> </td>
+   <td><%= item.genre.name %></td>
+   <td><% if item.is_active == false %>
+   <font color= "green">販売中
+    <% else %>
+    <font color= "grey">販売停止中
+    <% end %>
+   </td>
+  </tr>
+   <% end %>
+  </tbody>
+  <%= paginate @items %>
+  
+</div>

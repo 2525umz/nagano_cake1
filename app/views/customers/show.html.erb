@@ -1,0 +1,44 @@
+<h1>顧客マイページ</h1>
+ <% if flash[:success] %>
+     <p id="success">
+       <%= flash[:success] %>
+     </p>
+   <% end %>
+
+ <strong class="information-link">登録情報</strong>
+                <%= link_to " 編集する", customers_edit_path, class: "glyphicon glyphicon-pencil btn btn-success" %>
+            <tr>
+                <td class="col-xs-2">氏名</td>
+                <td><%= current_customer.last_name %><%= current_customer.first_name %></td>
+            </tr>
+
+            <tr>
+                <td class="col-xs-2">カナ</td>
+                <td><%= current_customer.last_name_kana %><%= current_customer.first_name_kana %></td>
+            </tr>
+
+            <tr>
+                <td class="col-xs-2">郵便番号</td>
+                <td><%= current_customer.postal_code %></td>
+            </tr>
+
+            <tr>
+                <td class="col-xs-2">住所</td>
+                <td><%= current_customer.address %></td>
+            </tr>
+
+            <tr>
+                <td class="col-xs-2">電話番号</td>
+                <td><%= current_customer.telephone_number %></td>
+            </tr>
+
+            <tr>
+                <td class="col-xs-2">メールアドレス</td>
+                <td><%= current_customer.email %></td>
+            </tr>
+        </table>
+       <p>配送先</p><%= link_to"一覧を見る", addresses_path %>
+       <p>注文履歴</p> <%= link_to "一覧を見る", orders_path %>
+        
+  <div>
+</div>

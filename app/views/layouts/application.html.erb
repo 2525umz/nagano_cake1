@@ -8,8 +8,32 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
+    <% if admin_signed_in? %>
+    <li><%= link_to "商品一覧", admin_items_path, style: "font-family: HiraMinPro-W6; color: #000000;" %></li>
+    <li><%= link_to "会員一覧", admin_customers_path, style: "font-family: HiraMinPro-W6; color: #000000;" %></li>      
+    <li><%= link_to "ジャンル一覧", admin_genres_path, style: "font-family: HiraMinPro-W6; color: #000000;" %></li>
+    <li><%= link_to "注文履歴一覧", admin_order_path(:id), style: "font-family: HiraMinPro-W6; color: #000000;" %></li>
+    <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+    
+    
+    <% elsif customer_signed_in? %>
+    <li id="youkoso">ようこそ、<%= current_customer.last_name %>さん！</li>
+    <li><%= link_to "ホーム", "/" %></li>
+    <li><%= link_to "マイページ", customers_path %></li>
+    <li><%= link_to "店舗詳細", about_path %></li>
+    <li><%= link_to "商品一覧", items_path %></li>
+    <li><%= link_to "カート内", cart_items_path %></li>
+    <li><%= link_to destroy_customer_session_path, method: :delete do %><i class="fas fa-sign-out-alt"></i>ログアウト<% end %></li>
+      <% else %>
+    <li><%= link_to "ホーム", "/" %></li>
+    <li><%= link_to "店舗詳細", about_path %></li>
+    <li><%= link_to "商品紹介", items_path %></li>
+    <li><%= link_to "ログイン",  customer_session_path %></li>
+    <li><%= link_to "新規登録", new_customer_registration_path %></li>
+    <% end %>
+    
+    
     <%= yield %>
   </body>
-</html>

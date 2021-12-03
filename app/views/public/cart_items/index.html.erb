@@ -1,0 +1,74 @@
+<h1>カート内</h1>
+<div class="row">
+    <div class="col-xs-12">
+      <div>
+        <strong class="information-link"><h3>ショッピングカート</h3></strong>
+         <%= link_to "カートを空にする",  cart_items_path, method: :delete, class: "pull-right btn btn-danger" %>
+      </div>
+        <table class="table table-hover table-bordered col-xs-10" >
+         <thead>
+          <tr class="info">
+            <th class="col-xs-3">商品名</th>
+            <th class="col-xs-2">単価（税込み）</th>
+            <th class="col-xs-1">数量</th>
+            <th class="col-xs-1">小計</th>
+            <th class="col-xs-1"></th>
+          </tr>
+         </thead>
+         <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td class="col-xs-3"><%= cart_item.item.name %></td>
+           
+            <td class="col-xs-1">¥ <%= ((cart_item.item.price*1.1).floor).to_s(:delimited, delimiter: ',') %> (税込)
+               <td class="col-xs-1">   <%= form_for(cart_item, url: cart_item_path(cart_item)) do |c| %>
+                <p>
+                  <%= c.number_field :amount, min:1, max:10000, step:1 %>
+                  <%= c.submit "変更", class: "btn btn-primary" %>
+                </p>
+                <% end %>
+            
+            
+              
+                <td class="col-xs-1">
+                <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %>
+            
+            </td>
+           <% end %>    
+         </td>  
+          
+           
+            <td class="col-xs-1">
+               
+            </td>
+          </tr>
+         
+         </tbody>
+        </table>
+    </div>
+</div>
+ 
+
+<div class="col-xs-8">
+    <span>
+    <%= link_to "買い物を続ける", root_path, class: "btn btn-primary", data: {"turbolinks" => false} %>
+    </span>
+</div>
+<div class="col-xs-4">
+   <span>
+     <%= link_to "注文画面", new_order_path, class: "btn btn-danger" %>
+   </span>
+    <table class="table table-bordered">
+        <tr>
+          
+        </tr>
+    </table>
+</div>
+
+
+<div class = "col-xs-4 col-xs-offset-4">
+    <span>
+      
+    </span>
+    </div>
+</div>

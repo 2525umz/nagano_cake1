@@ -1,0 +1,23 @@
+<h1>商品詳細</h1>
+
+<%= attachment_image_tag @item, :image, :fill, 300, 250, format: 'jpeg',fallback: "no_image.jpg", size:'380x300' %>
+
+		<h3><%= @item.name %></h3>
+		
+		<p class="item-content2", style="font-family: arial black">¥ <%= ((@item.price*1.1).floor).to_s(:delimited, delimiter: ',') %> (税込)
+		
+		<%= form_with model: @cart_item, url:cart_items_path, method: :POST, local: true do |f| %>
+		 <%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 20 %>
+		 <%= f.hidden_field :item_id, :value => @item.id %>
+		 <%= f.hidden_field :customer_id, :value => current_customer.id %>
+		  <p><%= f.submit "カートに入れる",  class:"btn btn-primary" %></p>
+		 
+		 <% end %>
+		</div>
+
+		<div class="col-xs-5">
+			
+		</div>
+
+
+	
